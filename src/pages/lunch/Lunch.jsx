@@ -1,9 +1,9 @@
 import DescriptionBox from "../../ui/DescriptionBox";
 import Hemisphere from "../../ui/Hemisphere";
 
-import images from "../../assets";
+import images from "../../lunchList";
 
-function Home() {
+function Lunch() {
   return (
     <div className=" flex-grow">
       <Hemisphere images={images} color={"bg-pink-300"} />
@@ -12,4 +12,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Lunch;

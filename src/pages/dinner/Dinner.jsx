@@ -1,15 +1,15 @@
 import DescriptionBox from "../../ui/DescriptionBox";
 import Hemisphere from "../../ui/Hemisphere";
 
-import images from "../../assets";
+import images from "../../dinnerList";
 
-function Home() {
+function Dinner() {
   return (
     <div className=" flex-grow">
-      <Hemisphere images={images} color={"bg-orange-300"} />
+      <Hemisphere images={images} />
       <DescriptionBox />
     </div>
   );
 }
 
-export default Home;
+export default Dinner;

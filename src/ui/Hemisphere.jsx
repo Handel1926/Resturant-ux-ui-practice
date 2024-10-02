@@ -1,6 +1,5 @@
-import { createContext, useCallback, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import FoodCarousel from "./FoodCarousel";
-import { HiArrowCircleDown } from "react-icons/hi";
 import ArrowBtn from "./ArrowBtn";
 
 export const CarouselContext = createContext();
@@ -8,7 +7,7 @@ export const CarouselContext = createContext();
 function Hemisphere({ images }) {
   const [imageList, setImageList] = useState(images);
   const [anim, setAnim] = useState(false);
-  const displayImage = imageList.find((img) => img.id == 3);
+  const displayImage = imageList.find((img) => img.id === 3);
 
   useEffect(() => {
     const timeOut = setTimeout(() => {

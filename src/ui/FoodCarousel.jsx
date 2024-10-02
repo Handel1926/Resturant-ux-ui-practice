@@ -4,7 +4,7 @@ import "react-fancy-circular-carousel/FancyCarousel.css";
 import { CarouselContext } from "./Hemisphere";
 
 function FoodCarousel() {
-  const { images, focusImage } = useContext(CarouselContext);
+  const { images } = useContext(CarouselContext);
 
   return (
     <div className=" absolute  left-[29%] top-[80%] container">

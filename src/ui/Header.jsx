@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Header() {
   return (
@@ -17,13 +17,34 @@ function Header() {
       <div className="w-1/3 h-full items-start">
         <ul className="flex gap-6 items-start font-semibold">
           <li>
-            <Link to={"/"}>Breakfast</Link>
+            <NavLink
+              to={"/"}
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              Breakfast
+            </NavLink>
           </li>
           <li>
-            <Link to={"/lunch"}>Lunch</Link>
+            <NavLink
+              to={"/lunch"}
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              Lunch
+            </NavLink>
           </li>
           <li>
-            <Link to={"/dinner"}>Dinner</Link>
+            <NavLink
+              to={"/dinner"}
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              Dinner
+            </NavLink>
           </li>
         </ul>
       </div>
