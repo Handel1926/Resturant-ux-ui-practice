@@ -12,11 +12,11 @@ This is a FrontEnd Ui for laptops only built as a take home assignment using Rea
 # Tech used in building project
 App was built using React (vite)
 
-#App setup
-Disclaimer
+# App setup
+# Disclaimer
  App has just frontEnd and no internet is needed
 
-#installation of dependencies
+# installation of dependencies
 After cloning Repository, Navigate to directory and run
 
 npm install
