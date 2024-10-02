@@ -21,5 +21,5 @@ After cloning Repository, Navigate to directory and run
 
 npm install
 
-#Start app
+# Start app
 npm run dev
