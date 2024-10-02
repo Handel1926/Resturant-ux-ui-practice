@@ -6,7 +6,7 @@ import images from "../../assets";
 function Home() {
   return (
     <div className=" flex-grow">
-      <Hemisphere images={images} color={"bg-green-300"} />
+      <Hemisphere images={images} color={"bg-pink-300"} />
       <DescriptionBox />
     </div>
   );

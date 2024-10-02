@@ -1,20 +1,28 @@
 import { useContext } from "react";
-import FancyCarousel from "react-fancy-circular-carousel";
+
 import "react-fancy-circular-carousel/FancyCarousel.css";
 import { CarouselContext } from "./Hemisphere";
 
 function FoodCarousel() {
-  const { images, goRight } = useContext(CarouselContext);
+  const { images, focusImage } = useContext(CarouselContext);
 
   return (
-    <div className="relative  left-[270.66px] top-[864.33px] container">
+    <div className=" absolute  left-[29%] top-[80%] container">
       <div className="icon">
         {images &&
-          images.map((img, index) => (
-            <div className="imgBx" style={{ "--i": img.id }} key={index}>
-              <img src={img.url} alt="" />
-            </div>
-          ))}
+          images
+            .sort((a, b) => a - b)
+            .map((img, index) => (
+              <div
+                className={`imgBx ${img.id === 3 && " border border-red-500"} ${
+                  img.id === 0 || (img.id === 9 && "hidden")
+                } `}
+                style={{ "--i": img.id }}
+                key={index}
+              >
+                <img src={img.url} alt="" />
+              </div>
+            ))}
       </div>
     </div>
   );

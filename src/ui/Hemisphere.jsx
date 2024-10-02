@@ -1,16 +1,18 @@
 import { createContext, useCallback, useState } from "react";
 import FoodCarousel from "./FoodCarousel";
 import { HiArrowCircleDown } from "react-icons/hi";
+import ArrowBtn from "./ArrowBtn";
 
 export const CarouselContext = createContext();
 
-function Hemisphere({ images }) {
-  const [focusImage, setFocusImage] = useState(4);
+function Hemisphere({ images, color }) {
+  const [focusImage, setFocusImage] = useState(0);
   const [imageList, setImageList] = useState(images);
+  const displayImage = imageList.find((img) => img.id == 3);
 
   const goRight = () => {
     const newList = imageList.map((img) => {
-      const id = img.id === 1 ? 9 : img.id + 1;
+      const id = img.id === 9 ? 0 : img.id + 1;
       return { ...img, id };
     });
     setFocusImage((preV) => (preV === 8 ? 0 : preV + 1));
@@ -18,7 +20,7 @@ function Hemisphere({ images }) {
   };
   const goLeft = () => {
     const newList = imageList.map((img) => {
-      const id = img.id === 1 ? 9 : img.id - 1;
+      const id = img.id === 0 ? 9 : img.id - 1;
       return { ...img, id };
     });
     setFocusImage((preV) => (preV === 0 ? 8 : preV - 1));
@@ -26,23 +28,29 @@ function Hemisphere({ images }) {
   };
   console.log(focusImage);
   return (
-    <CarouselContext.Provider value={{ images: imageList, goRight, goLeft }}>
-      <div className="relative z-30  top-[-737.08px] left-[400px] w-[1176px] h-[1176px] rounded-full bg-pink-300 overflow-hidden">
+    <CarouselContext.Provider
+      value={{ images: imageList, focusImage, goRight, goLeft }}
+    >
+      <div
+        className={`relative z-30  top-[-75%] left-[20%] w-full h-[100vw] rounded-full ${color} overflow-hidden shadow-inner`}
+      >
         <FoodCarousel />
       </div>
-      <div className="absolute bottom-7 w-full p-2 flex justify-around items-center">
-        <button onClick={goRight} className="text-5xl">
-          <HiArrowCircleDown />
+      <div className="absolute bottom-[10%] w-11/12 h-fit grid grid-cols-2 justify-center items-center">
+        <button className="w-[218px] h-[53px] bg-orange-400 px-4 py-2 text-nowrap rounded-full ">
+          Quench Now
         </button>
-        <button onClick={goLeft} className="text-5xl ">
-          <HiArrowCircleDown />
-        </button>
+        <div className="w-full p-2 pr-[7%] flex justify-between items-center">
+          <ArrowBtn act={goLeft} />
+          <ArrowBtn act={goRight} />
+        </div>
       </div>
-      <div className="absolute bottom-[20px] right-[400px] z-50 h-[150px] w-[150px] rounded-full">
+
+      <div className="me absolute  flex items-center justify-center bottom-[25%] right-[25%] z-50 h-[120px] w-[120px] rounded-full overflow-hidden ">
         <img
-          src={imageList[focusImage].url}
+          src={displayImage.url}
           alt=""
-          className="h-full w-full bg-cover"
+          className="relative bottom-6 left-6 shadow-md shadow-black w-[80px] h-[80px] object-cover"
         />
       </div>
     </CarouselContext.Provider>
