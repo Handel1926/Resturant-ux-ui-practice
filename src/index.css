@@ -29,7 +29,7 @@
   height: 80px;
   border-radius: 50%;
   overflow: hidden;
-  transition: 2s;
+  transition: 1s;
   transform: rotate(calc(360deg / 12 * var(--i)));
   transform-origin: 340px;
 }
@@ -53,15 +53,15 @@
 }
 
 .move {
-  animation: fadein 5s linear;
+  animation: fadein 0.5s forwards;
 }
 
 @keyframes fadein {
   from {
-    opacity: 0;
+    transform: scale(0.5) rotate(90deg);
   }
   to {
-    opacity: 1;
+    transform: scale(1) rotate(360deg);
   }
 }
 

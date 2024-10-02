@@ -1,21 +1,32 @@
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import FoodCarousel from "./FoodCarousel";
 import { HiArrowCircleDown } from "react-icons/hi";
 import ArrowBtn from "./ArrowBtn";
 
 export const CarouselContext = createContext();
 
-function Hemisphere({ images, color }) {
-  const [focusImage, setFocusImage] = useState(0);
+function Hemisphere({ images }) {
   const [imageList, setImageList] = useState(images);
+  const [anim, setAnim] = useState(false);
   const displayImage = imageList.find((img) => img.id == 3);
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      if (anim) {
+        setAnim(false);
+      }
+    }, 500);
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [anim]);
 
   const goRight = () => {
     const newList = imageList.map((img) => {
       const id = img.id === 9 ? 0 : img.id + 1;
       return { ...img, id };
     });
-    setFocusImage((preV) => (preV === 8 ? 0 : preV + 1));
+    setAnim(true);
     setImageList((prevList) => newList);
   };
   const goLeft = () => {
@@ -23,16 +34,14 @@ function Hemisphere({ images, color }) {
       const id = img.id === 0 ? 9 : img.id - 1;
       return { ...img, id };
     });
-    setFocusImage((preV) => (preV === 0 ? 8 : preV - 1));
+    setAnim(true);
     setImageList((prevList) => newList);
   };
-  console.log(focusImage);
+  console.log(displayImage.bgColour);
   return (
-    <CarouselContext.Provider
-      value={{ images: imageList, focusImage, goRight, goLeft }}
-    >
+    <CarouselContext.Provider value={{ images: imageList, goRight, goLeft }}>
       <div
-        className={`relative z-30  top-[-75%] left-[20%] w-full h-[100vw] rounded-full ${color} overflow-hidden shadow-inner`}
+        className={`relative z-30  top-[-75%] left-[20%] w-full h-[100vw] rounded-full ${displayImage.bgColour} overflow-hidden shadow-inner delay-300`}
       >
         <FoodCarousel />
       </div>
@@ -50,7 +59,9 @@ function Hemisphere({ images, color }) {
         <img
           src={displayImage.url}
           alt=""
-          className="relative bottom-6 left-6 shadow-md shadow-black w-[80px] h-[80px] object-cover"
+          className={`relative bottom-6 left-6 shadow-md shadow-black w-[80px] h-[80px] object-cover ${
+            anim && "move"
+          }`}
         />
       </div>
     </CarouselContext.Provider>
